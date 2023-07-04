@@ -1,5 +1,5 @@
 # Flicker Chaos
-Flicker Chaos is a Simon Says game developed as a final project for the Event-Driven Programming course. Players can test their memory and reflexes as they attempt to replicate the given sequences of flickers in this retro-like game.
+Flicker Chaos is a Simon Says game developed as a final project for the Event-Driven Programming course. Players can test their memory as they attempt to replicate the given sequences of flickers in this retro-like game.
 
 ## Features
 - Three difficulty levels: Easy, Normal, and Difficult.
