@@ -9,7 +9,8 @@ Flicker Chaos is a Simon Says game developed as a final project for the Event-Dr
 # Getting Started
 To get started with Flicker Chaos, follow these steps:
 
-1. Clone the repository: git clone https://github.com/your-username/flicker-chaos.git
-2. Open the project in your preferred C# IDE (e.g., Visual Studio).
+1. Clone the repository: git clone https://github.com/HanzFelix/flicker-chaos.git
+2. Open the project in Visual Studio.
 3. Build the project to resolve dependencies.
 4. Run the application to start playing the game.
+
