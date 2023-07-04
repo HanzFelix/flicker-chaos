@@ -1,32 +1,41 @@
-name: build
+name: Create Release
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
-env:
-  DOTNET_VERSION: '6.0.401' # The .NET SDK version to use
+    branches:
+      - master
 
 jobs:
-  build:
-
-    name: build-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+  create_release:
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '4.7.2' # Replace with your desired .NET version
+
+    - name: Build and publish
+      run: dotnet publish -c Release -o ${{ github.workspace }}/publish
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Describe the changes made in this release.
+        draft: false
+        prerelease: false
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Release Artifact
+        path: ${{ github.workspace }}/publish
